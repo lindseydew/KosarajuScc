@@ -1,0 +1,107 @@
+*/
+public final class ReadWriteTextFileWithEncoding {
+
+  /** Requires two arguments - the file name, and the encoding to use.  */
+  public static void main(String... aArgs) throws IOException {
+    String fileName = aArgs[0];
+    String encoding = aArgs[1];
+    ReadWriteTextFileWithEncoding test = new ReadWriteTextFileWithEncoding(
+      fileName, encoding
+    );
+    test.write();
+    test.read();
+  }
+
+  /** Constructor. */
+  ReadWriteTextFileWithEncoding(String aFileName, String aEncoding){
+    fEncoding = aEncoding;
+    fFileName = aFileName;
+  }
+
+  /** Write fixed content to the given file. */
+  void write() throws IOException  {
+    log("Writing to file named " + fFileName + ". Encoding: " + fEncoding);
+    Writer out = new OutputStreamWriter(new FileOutputStream(fFileName), fEncoding);
+    try {
+      out.write(FIXED_TEXT);
+    }
+    finally {
+      out.close();
+    }
+  }
+
+  /** Read the contents of the given file. */
+  void read() throws IOException {
+    log("Reading from file.");
+    StringBuilder text = new StringBuilder();
+    String NL = System.getProperty("line.separator");
+    Scanner scanner = new Scanner(new FileInputStream(fFileName), fEncoding);
+    try {
+      while (scanner.hasNextLine()){
+        text.append(scanner.nextLine() + NL);
+      }
+    }
+    finally{
+      scanner.close();
+    }
+    log("Text read in: " + text);
+  }
+
+  // PRIVATE
+  private final String fFileName;
+  private final String fEncoding;
+  private final String FIXED_TEXT = "But soft! what code in yonder program breaks?";
+
+  private void log(String aMessage){
+    System.out.println(aMessage);
+  }
+}
+
+
+    public Digraph(In in) {
+        this(in.readInt());
+        int E = in.readInt();
+        for (int i = 0; i < E; i++) {
+            int v = in.readInt();
+            int w = in.readInt();
+            addEdge(v, w);
+        }
+    }
+
+
+
+     procedure DFS(G,v,IdLeader):
+
+         stack.push (v);
+
+         while (stack.not empty) {
+
+          v = stack.pop
+
+          if (v is unvisited) {
+
+            visited_vertex ++;
+
+            mark v as visited.
+
+            stack.push (v);
+
+            for all edges in G.IncidenteEdges (v) do
+
+                w ← G.opposite(v,e)
+
+                if (w.unvisited)
+
+                    stack.push (w)
+
+            done
+
+            * If this node is visited, then it's the second pop  and all the children nodes have been processed.
+
+            * Note a node It can be already visited if it had incoming edges from other nodes, and finishing time for this node is already calculated:
+
+          else if (! Finishingtime (v)
+
+            FinishingTime (v)
+
+            Leader (v) = IdLeader
