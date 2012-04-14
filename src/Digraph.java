@@ -6,7 +6,7 @@ import java.util.Stack;
 public class Digraph {
     private final int V;
     private int E;
-    private LinkedList<Integer>[] adj;
+    public LinkedList<Integer>[] adj;
 
     /**
      * Create an empty digraph with V vertices.
@@ -104,8 +104,7 @@ public class Digraph {
         Digraph R = new Digraph(V);
         for (int v = 0; v < V; v++) {
             for (int w : adj[v]) {
-                R.addEdge(w - 1, v);
-                System.out.println("w " + w + " v " + v);
+                R.addEdge(w, v);
             }
         }
         return R;
@@ -133,7 +132,7 @@ public class Digraph {
 //     */
     public static void main(String[] args) {
         In in = new In("/Users/lindseydew/Documents/workspace/KosajaruScc/src/test[0,3,3,4].txt");
-        Digraph G = new Digraph(10);
+        Digraph G = new Digraph(9);
         try{
         G.buildGraphFromFile(in.readFile(), in);
         System.out.println(G);

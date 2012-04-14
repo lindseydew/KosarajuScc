@@ -6,7 +6,7 @@ public class DepthFirstOrder {
     private int[] pre;                 // pre[v]    = preorder  number of v
     private int[] post;                // post[v]   = postorder number of v
     private Queue<Integer> preorder;   // vertices in preorder
-    private Queue<Integer> postorder;  // vertices in postorder
+    private Stack<Integer> postorder;  // vertices in postorder
     private int preCounter;            // counter or preorder numbering
     private int postCounter;           // counter for postorder numbering
 
@@ -14,10 +14,10 @@ public class DepthFirstOrder {
     public DepthFirstOrder(Digraph G) {
         pre    = new int[G.V()];
         post   = new int[G.V()];
-        postorder = new Queue<Integer>();
+        postorder = new Stack<Integer>();
         preorder  = new Queue<Integer>();
         marked    = new boolean[G.V()];
-        for (int v = 0; v < G.V(); v++)
+        for (int v = G.V() - 1; v >= 0; v--)
             if (!marked[v]) dfs(G, v);
     }
 
@@ -36,13 +36,13 @@ public class DepthFirstOrder {
     private void dfs(Digraph G, int v) {
         marked[v] = true;
         pre[v] = preCounter++;
-        preorder.enqueue(v);
+//        preorder.enqueue(v);
         for (int w : G.adj(v)) {
             if (!marked[w]) {
                 dfs(G, w);
             }
         }
-        postorder.enqueue(v);
+        postorder.push(v);
         post[v] = postCounter++;
     }
 
@@ -80,10 +80,11 @@ public class DepthFirstOrder {
     }
 
     // return vertices in reverse postorder as an Iterable
-    public Iterable<Integer> reversePost() {
+    public Stack<Integer> reversePost() {
         Stack<Integer> reverse = new Stack<Integer>();
-        for (int v : postorder)
-            reverse.push(v);
+          while(!postorder.isEmpty()) {
+              reverse.push(postorder.pop());
+          }
         return reverse;
     }
 
